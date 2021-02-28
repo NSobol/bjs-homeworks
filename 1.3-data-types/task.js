@@ -20,7 +20,9 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
         return `Параметр "Срок ипотеки" содержит неправильное значение ${date}`;
     }
     let month = 30.4375; // среднее количество дней в месяце
-    let n = Math.round(day / month); // считаем месяцы
+    let m = Math.round(day / month); // считаем месяцы
+    let n;
+    (m > 0) ? (n = m) : (n = (day / month).toFixed(1));
     let payment = S * (P + P / (((1 + P) ** n) - 1));
     let totalAmount = parseFloat((payment * n).toFixed(2));
     return totalAmount;
