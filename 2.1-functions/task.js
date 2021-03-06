@@ -62,10 +62,8 @@ function getAverageMark(marks) {
 //задача 3.
 function getPersonData(secretData) {
     let person = {};
-    person.firstName = secretData["aaa"];
-    person.lastName = secretData["bbb"];
-    person.firstName = getDecodedValue(person.firstName);
-    person.lastName = getDecodedValue(person.lastName);
+    person.firstName = getDecodedValue(secretData["aaa"]);
+    person.lastName = getDecodedValue(secretData["bbb"]);
     return person;
 }
 
