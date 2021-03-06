@@ -64,14 +64,9 @@ function getPersonData(secretData) {
     let person = {};
     person.firstName = secretData["aaa"];
     person.lastName = secretData["bbb"];
-    let name = getDecodedValue(person.firstName);
-    let name1 = getDecodedValue(person.lastName);
-    person.firstName = name;
-    person.lastName = name1;
-    return {
-        firstName: name,
-        lastName: name1,
-    }
+    person.firstName = getDecodedValue(person.firstName);
+    person.lastName = getDecodedValue(person.lastName);
+    return person;
 }
 
 function getDecodedValue(secret) {
