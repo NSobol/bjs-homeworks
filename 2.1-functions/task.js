@@ -69,10 +69,6 @@ function getPersonData(secretData) {
 
 function getDecodedValue(secret) {
     let names;
-    if (secret == 0) {
-        names = "Родриго";
-    } else {
-        names = "Эмильо";
-    }
+    (secret == 0) ? names = "Родриго": names = "Эмильо";
     return names;
 }
