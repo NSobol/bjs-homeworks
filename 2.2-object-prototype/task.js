@@ -27,7 +27,7 @@ function checkBirthday(birthday) {
     // код для задачи №3 писать здесь
     let now = (new Date).getTime();
     let date = Date.parse(birthday);
-    let diff = Math.round((now - date) / (1000 * 3600 * 24));
+    let diff = Math.round(((now - date) + (1000 * 3600 * 4)) / (1000 * 3600 * 24));
     let averageMonth = 30.44;
     let age = Math.floor(diff / (averageMonth * 12));
     // считаем количество лет
