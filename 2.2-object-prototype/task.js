@@ -32,6 +32,6 @@ function checkBirthday(birthday) {
     let age = Math.floor(diff / (averageMonth * 12));
     // считаем количество лет
     if (age >= 18) {
-        return age;
+        return true;
     }
 }
