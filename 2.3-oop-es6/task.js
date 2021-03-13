@@ -99,3 +99,34 @@ class Library {
 }
 
 //задача 3.
+class StudentLog {
+    constructor(name) {
+        this.name = name;
+    }
+
+    getName() {
+        return this.name;
+    }
+
+
+
+    addGrade(grade, subject) {
+        let score = {};
+        let marks = [];
+        this.grade = grade;
+        this.subject = subject;
+        score.subject = this.subject;
+        if (this.subject in score) {
+            marks.push(this.grade);
+        } else {
+            score.subject;
+        }
+
+        getAverageBySubject(subject) {
+
+        }
+
+        getTotalAverage() {
+
+        }
+    }
