@@ -11,6 +11,7 @@ class PrintEditionItem {
 
     fix() {
         this.state *= 1.5;
+        return this.state;
     }
 
     set state(state) {
@@ -82,17 +83,25 @@ class Library {
 
 
     findBookBy(type, value) {
+        this.type = type;
+        this.value = value;
         for (let i = 0; i < this.books.length; i++) {
             if (this.books[i].type === value) {
                 return book;
+            } else {
+                return null;
             }
         }
     }
 
     giveBookByName(bookName) {
+        this.bookName = bookName;
         for (let i = 0; i < this.books.length; i++) {
-            if (this.books[i].type === value) {
+            if (this.books[i].bookName === bookName) {
                 this.books.splice(books[i], 1);
+                return this.book;
+            } else {
+                return null;
             }
         }
     }
