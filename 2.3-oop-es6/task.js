@@ -111,31 +111,52 @@ class Library {
 class StudentLog {
     constructor(name) {
         this.name = name;
+        this.journal = {};
+        this.marks = [];
     }
 
     getName() {
         return this.name;
     }
 
-
-
     addGrade(grade, subject) {
-        let score = {};
-        let marks = [];
-        this.grade = grade;
-        this.subject = subject;
-        score.subject = this.subject;
-        if (this.subject in score) {
-            marks.push(this.grade);
+        if (!(subject in this.journal)) {
+            this.journal[subject] = [];
+        }
+
+        if (grade >= 1 && grade <= 5) {
+            this.journal[subject].push(grade);
+            console.log(this.journal);
         } else {
-            score.subject;
+            console.log(`Поставлена неверная оценка ${grade} по предмету ${subject}. Принимаются только оценки от 1 до 5.`);
         }
 
-        getAverageBySubject(subject) {
+        return this.journal[subject].length;
+    }
 
+    getAverageBySubject(subject) { // средняя по предмету
+        let numberRatings = this.subject.length;
+        console.log(numberRatings);
+        let averageSection = 0;
+        if (numberRatings == 0) {
+            return 0;
         }
+        for (let i = 0; i < this.subject.length; i++) {
+            averageSection += this.subject[i];
+        }
+        averageSection /= this.subject.length;
+        return averageSection;
+    }
 
-        getTotalAverage() {
-
+    getTotalAverage() {
+        let marksAverage = 0;
+        let result = 0;
+        if (!(subject in this.journal)) {
+            return 0;
+        } else {
+            this.marks.push(this.journal[subject]);
+            console.log(this.marks);
         }
     }
+
+}
