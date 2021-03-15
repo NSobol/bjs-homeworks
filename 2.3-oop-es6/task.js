@@ -64,6 +64,7 @@ class DetectiveBook extends Book {
         this.type = "detective";
     }
 }
+
 // Задача 2.
 
 class Library {
@@ -73,23 +74,19 @@ class Library {
     }
 
     addBook(book) {
-        this.book = book;
-        for (let i = 0; i < this.books.length; i++) {
-            if (this._state > 30) {
-                this.books[i].push(this.book);
-            }
+        if (book.state > 30) {
+            this.books.push(book);
         }
     }
 
-
     findBookBy(type, value) {
-        this.type = type;
-        this.value = value;
         for (let i = 0; i < this.books.length; i++) {
-            if (this.books[i].type === value) {
-                return book;
-            } else {
-                return null;
+            let element = this.books[i];
+            //console.log(element);
+            for (let prop in element) {
+                if (element[prop] === this.value) {
+                    console.log(element);
+                }
             }
         }
     }
@@ -106,6 +103,24 @@ class Library {
         }
     }
 }
+
+const library = new Library("Библиотека имени Ленина");
+
+console.log(library);
+
+library.addBook(new DetectiveBook("Артур Конан Дойл", "Полное собрание повестей и рассказов о Шерлоке Холмсе в одном томе", 2019, 1008));
+
+library.addBook(new FantasticBook("Аркадий и Борис Стругацкие", "Пикник на обочине", 1972, 168));
+library.addBook(new NovelBook("Герберт Уэллс", "Машина времени", 1895, 138));
+library.addBook(new Magazine("Мурзилка", 1924, 60));
+
+console.log(library.findBookBy("name", "Властелин колец")); //null
+console.log(library.findBookBy("releaseDate", 1924).name); //"Мурзилка"
+console.log(library);
+console.log("Количество книг до выдачи: " + library.books.length); //Количество книг до выдачи: 4
+library.giveBookByName("Машина времени");
+console.log("Количество книг после выдачи: " + library.books.length); //Количество книг после выдачи: 3
+
 
 //задача 3.
 class StudentLog {
