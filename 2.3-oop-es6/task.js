@@ -126,7 +126,6 @@ class StudentLog {
 
         if (grade >= 1 && grade <= 5) {
             this.journal[subject].push(grade);
-            console.log(this.journal);
         } else {
             console.log(`Поставлена неверная оценка ${grade} по предмету ${subject}. Принимаются только оценки от 1 до 5.`);
         }
@@ -135,28 +134,49 @@ class StudentLog {
     }
 
     getAverageBySubject(subject) { // средняя по предмету
-        let numberRatings = this.subject.length;
-        console.log(numberRatings);
+        let marks;
+        if (subject in this.journal) {
+            marks = this.journal[subject];
+        } else if (!(subject in this.journal)) {
+            return 0;
+        }
+        let numberRatings = this.journal[subject].length;
         let averageSection = 0;
         if (numberRatings == 0) {
             return 0;
         }
-        for (let i = 0; i < this.subject.length; i++) {
-            averageSection += this.subject[i];
+        for (let i = 0; i < marks.length; i++) {
+            averageSection += marks[i];
         }
-        averageSection /= this.subject.length;
+        averageSection /= marks.length;
         return averageSection;
     }
 
     getTotalAverage() {
-        let marksAverage = 0;
-        let result = 0;
-        if (!(subject in this.journal)) {
-            return 0;
-        } else {
-            this.marks.push(this.journal[subject]);
-            console.log(this.marks);
+        let scoreAverage = {};
+        let marksAverage = [];
+        for (let prop in this.journal) {
+            scoreAverage[prop] = this.getAverageBySubject(prop);
+            marksAverage.push(this.getAverageBySubject(prop));
         }
+        let result = 0;
+        let grade = function () {
+            for (let i = 0; i < marksAverage.length; i++) {
+                result += marksAverage[i];
+            }
+            result /= marksAverage.length;
+            return result;
+        }
+        scoreAverage.average = grade();
+        return scoreAverage.average;
     }
-
 }
+
+const log = new StudentLog('Олег Никифоров');
+
+log.addGrade(2, 'algebra');
+log.addGrade(4, 'algebra');
+log.addGrade(5, 'geometry');
+log.addGrade(4, 'geometry');
+
+console.log(log.getTotalAverage());
