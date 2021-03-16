@@ -4,9 +4,8 @@ function parseCount(resume) {
     let typeNumber = Number.parseInt(resume);
     if (Number.isNaN(typeNumber)) {
         throw new Error("Невалидное значение");
-    } else {
-        return typeNumber;
     }
+    return typeNumber;
 }
 
 function validateCount(essence) {
@@ -42,17 +41,11 @@ class Triangle {
 
 function getTriangle(a, b, c) {
     try {
-        const myTriangle = new Triangle(a, b, c);
-        return myTriangle;
+        return myTriangle = new Triangle(a, b, c);
     } catch (e) {
         return {
-            getPerimeter: function () {
-                return "Ошибка! Треугольник не существует";
-            },
-
-            getArea: function () {
-                return "Ошибка! Треугольник не существует";
-            },
+            getPerimeter: () => "Ошибка! Треугольник не существует",
+            getArea: () => "Ошибка! Треугольник не существует",
         }
     }
 }
