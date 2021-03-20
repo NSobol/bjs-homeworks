@@ -29,3 +29,25 @@ function getReliableWeaponsNames(param) {
 function getTotalDamage() {
     return weapons.reduce((prev, cur) => prev + cur.attack, 0);
 }
+
+//Задача со звездочкой
+function getTotalAcount(arr, param) {
+    let result = [];
+    arr.reduce((sum, item) => {
+        if (sum < param) {
+            result.push(item);
+            return sum + item;
+        }
+    }, 0);
+    return result.length;
+}
+
+//Задача 2.
+
+function compareArrays(arr1, arr2) {
+    return arr1.length === arr2.length && arr1.every((elem, i) => elem === arr2[i]);
+}
+
+function memorize(fn, limit) {
+
+}
