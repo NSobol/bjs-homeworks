@@ -55,28 +55,22 @@ class AlarmClock {
 
         function checkClock(time) {
             let oclock = Date.parse(time);
-            let now = new Date).getTime();
-        if (now === oclock) {
-            function fn() {
-                console.log(`Доброе утро! Хорошего дня!`);
+            let now = (new Date).getTime();
+            if (now === oclock) {
+                function fn() {
+                    console.log(`Доброе утро! Хорошего дня!`);
+                }
             }
         }
-
     }
 
-    stop() {
+    stop() {}
 
-    }
-
-    printAlarms() {
-
-    }
+    printAlarms() {}
 
     clearAlarms() {
         this.alarmCollection.length = 0;
     }
-
 }
-
 const alarm = new AlarmClock;
 console.log(alarm.getCurrentFormattedTime());
