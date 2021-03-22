@@ -3,35 +3,30 @@
 class AlarmClock {
     constructor() {
         this.alarmCollection = [];
-        this.timerId = {};
-        const idMax = 4;
-
+        this.timerId = null;
     }
 
-    addClock(callback, time) {
-        id = setTimeout(fn, 0);
-        console.log(id);
-
-        function poisk(id) {
-            let poiskIDd = alarmCollection.filter(item => item.id === id);
-            if (poiskIDd.length === 0) {
-                this.alarmCollection.push({
-                    id: id,
-                    time: time,
-                    fn
-                });
-                console.log("Id добавлен");
-            } else {
-                console.log("Ошибка! Id уже существует");
-            }
+    addClock(fn, time, id) {
+        if (!id) {
+            throw new Error("Ошибка! Id не передан!");
         }
+
+        if (this.alarmCollection.some(item => item.id === id)) {
+            console.error("Ошибка! Id уже существует");
+        }
+
+        this.alarmCollection.push({
+            id,
+            time,
+            fn
+        });
     }
 
     removeClock(alarmCollection, id) {
-        let newArr = arr.filter(function (item) {
+        let newArr = this.alarmCollection.filter(function (item) {
             return item.id !== id;
         })
-        if (arr.length !== newArr.length) {
+        if (alarmCollection.length !== newArr.length) {
             return true;
         } else {
             return false;
@@ -57,9 +52,14 @@ class AlarmClock {
             let oclock = Date.parse(time);
             let now = (new Date).getTime();
             if (now === oclock) {
-                function fn() {
-                    console.log(`Доброе утро! Хорошего дня!`);
+                id = setTimeout(fn, 0);
+                if (this.alarmCollection.some(item => item.id === id)) {
+                    return id = this.alarmCollection.length;
                 }
+            }
+
+            function fn() {
+                console.log(`Доброе утро! Хорошего дня!`);
             }
         }
     }
