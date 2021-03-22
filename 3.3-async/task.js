@@ -9,18 +9,22 @@ class AlarmClock {
     }
 
     addClock(callback, time) {
+        id = setTimeout(fn, 0);
+        console.log(id);
 
-        try {
-
-        } catch {
-
+        function poisk(id) {
+            let poiskIDd = alarmCollection.filter(item => item.id === id);
+            if (poiskIDd.length === 0) {
+                this.alarmCollection.push({
+                    id: id,
+                    time: time,
+                    fn
+                });
+                console.log("Id добавлен");
+            } else {
+                console.log("Ошибка! Id уже существует");
+            }
         }
-        this.alarmCollection.push({
-            id,
-            time,
-            callback
-        });
-
     }
 
     removeClock(alarmCollection, id) {
@@ -37,14 +41,25 @@ class AlarmClock {
 
     getCurrentFormattedTime() {
         let hours = new Date().getHours();
-        let minut = new Date().getMinutes();
-        return `0${hours}:${minut}`;
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        let minute = new Date().getMinutes();
+        if (minute < 10) {
+            minute = "0" + minute;
+        }
+        return `${hours}:${minute}`;
     }
 
     start() {
 
-        function checkClock() {
-
+        function checkClock(time) {
+            let oclock = Date.parse(time);
+            let now = new Date).getTime();
+        if (now === oclock) {
+            function fn() {
+                console.log(`Доброе утро! Хорошего дня!`);
+            }
         }
 
     }
@@ -64,4 +79,4 @@ class AlarmClock {
 }
 
 const alarm = new AlarmClock;
-alarm.getCurrentFormattedTime();
+console.log(alarm.getCurrentFormattedTime());
