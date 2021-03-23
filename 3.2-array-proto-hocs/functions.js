@@ -44,10 +44,39 @@ function getTotalAcount(arr, param) {
 
 //Задача 2.
 
+function sleep(milliseconds) {
+    let e = new Date().getTime() + milliseconds;
+    while (new Date().getTime() <= e) {}
+}
+
+function sum(...args) {
+    sleep(500);
+    return args.reduce((sum, arg) => {
+        return sum += +arg;
+    }, 0);
+}
+
 function compareArrays(arr1, arr2) {
     return arr1.length === arr2.length && arr1.every((elem, i) => elem === arr2[i]);
 }
 
 function memorize(fn, limit) {
+    memory = [];
 
+    function result() {
+        const resultArr = Array.from(arguments);
+        let value = memory.find(elem => compareArrays(memory.args, resultArr));
+        if (value) {
+            console.log(`Результаты из памяти &{value.result}`);
+        } else {
+            memory.push({
+                args: resultArr,
+                result: fn(...resultArr),
+            });
+            if (memory.length > limit) {
+                memory.shift();
+            }
+            return `Вычисляем результат: ${memory[memory.length-1].result}`
+        }
+    }
 }
