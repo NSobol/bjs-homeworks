@@ -16,16 +16,14 @@ class AlarmClock {
         }
 
         this.alarmCollection.push({
-            id,
             time,
-            fn
+            fn,
+            id
         });
     }
 
     removeClock(alarmCollection, id) {
-        let newArr = this.alarmCollection.filter(function (item) {
-            return item.id !== id;
-        })
+        let newArr = this.alarmCollection.filter(item => item.id !== id);
         if (alarmCollection.length !== newArr.length) {
             return true;
         } else {
@@ -35,27 +33,21 @@ class AlarmClock {
     }
 
     getCurrentFormattedTime() {
-        let hours = new Date().getHours();
-        if (hours < 10) {
-            hours = "0" + hours;
-        }
-        let minute = new Date().getMinutes();
-        if (minute < 10) {
-            minute = "0" + minute;
-        }
-        return `${hours}:${minute}`;
+        return new Date().toTimeString().slice(0, 5);
     }
 
     start() {
+        const getCurrentTime = this.getCurrentFormattedTime;
 
-        function checkClock(time) {
-            let oclock = Date.parse(time);
-            let now = (new Date).getTime();
-            if (now === oclock) {
+        function checkClock(clock) {
+            if (getCurrentTime() === clock.time) {
                 id = setTimeout(fn, 0);
-                if (this.alarmCollection.some(item => item.id === id)) {
-                    return id = this.alarmCollection.length;
-                }
+            }
+
+            if (this.timerId === null) {
+                this.timerId = setInterval(() => {
+                    this.alarmCollection.forEach(item => checkClock(item))
+                }, 1000)
             }
 
             function fn() {
@@ -64,12 +56,19 @@ class AlarmClock {
         }
     }
 
-    stop() {}
+    stop() {
+        if (this.timerId) {
+            clearInterval(this.timerId);
+            this.timerId = null;
+        }
+    }
 
-    printAlarms() {}
+    printAlarms() {
+        alarmCollection.forEach(elem => console.log(`Будильник №${elem.id} время: ${elem.time}`));
+    }
 
     clearAlarms() {
-        this.alarmCollection.length = 0;
+        this.alarmCollection = [];
     }
 }
 const alarm = new AlarmClock;
