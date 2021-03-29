@@ -32,14 +32,14 @@ function getTotalDamage() {
 
 //Задача со звездочкой
 function getTotalAcount(arr, param) {
-    let result = [];
+    let count = 0;
     arr.reduce((sum, item) => {
         if (sum < param) {
-            result.push(item);
+            count += 1;
             return sum + item;
         }
     }, 0);
-    return result.length;
+    return count;
 }
 
 //Задача 2.
@@ -61,14 +61,15 @@ function compareArrays(arr1, arr2) {
 }
 
 function memorize(fn, limit) {
-    memory = [];
+    const memory = [];
 
     function result() {
-        const resultArr = Array.from(...args);
-        let value = memory.find(elem => compareArrays(memory.args, resultArr));
+        const value = memory.find(item => compareArrays(arr1, item.args));
+
         if (value) {
-            return value.result;
+            return value;
         }
+
         memory.push({
             args: resultArr,
             result: fn(...resultArr),
@@ -78,18 +79,4 @@ function memorize(fn, limit) {
         }
         return memory[memory.length - 1].result;
     }
-}
-
-function getMux() {
-    let mux = function (a, b) {
-        return (a * b, 10);
-    }
-    return mux;
-}
-
-function getDiscriminant(a, b, c) {
-    const discriminant = function (a, b, c, ) {
-        return (b ** 2 - 4 * a * c, 10);
-    }
-    return discriminant;
 }
