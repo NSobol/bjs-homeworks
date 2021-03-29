@@ -6,7 +6,7 @@ class AlarmClock {
         this.timerId = null;
     }
 
-    addClock(fn, time, id) {
+    addClock(time, fn, id) {
         if (!id) {
             throw new Error("Ошибка! Id не передан!");
         }
@@ -22,9 +22,11 @@ class AlarmClock {
         });
     }
 
-    removeClock(alarmCollection, id) {
-        let newArr = this.alarmCollection.filter(item => item.id !== id);
-        if (alarmCollection.length !== newArr.length) {
+    removeClock(id) {
+        let alarmLength = this.alarmCollection.length;
+        this.alarmCollection = this.alarmCollection.filter(item => item.id !== id);
+        let alarmLengthNew = this.alarmCollection.length;
+        if (alarmLength !== alarmLengthNew) {
             return true;
         } else {
             return false;
@@ -41,19 +43,15 @@ class AlarmClock {
 
         function checkClock(clock) {
             if (getCurrentTime() === clock.time) {
-                id = setTimeout(fn, 0);
-            }
-
-            if (this.timerId === null) {
-                this.timerId = setInterval(() => {
-                    this.alarmCollection.forEach(item => checkClock(item))
-                }, 1000)
-            }
-
-            function fn() {
-                console.log(`Доброе утро! Хорошего дня!`);
+                clock.callback();
             }
         }
+    }
+
+    if (this.timerId === null) {
+        this.timerId = setInterval(() => {
+            this.alarmCollection.forEach(item => checkClock(item))
+        }, 1000)
     }
 
     stop() {
@@ -64,10 +62,11 @@ class AlarmClock {
     }
 
     printAlarms() {
-        alarmCollection.forEach(elem => console.log(`Будильник №${elem.id} время: ${elem.time}`));
+        this.alarmCollection.forEach(elem => console.log(`Будильник №${elem.id} время: ${elem.time}`));
     }
 
     clearAlarms() {
+        stop();
         this.alarmCollection = [];
     }
 }
