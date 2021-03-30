@@ -50,7 +50,7 @@ function sleep(milliseconds) {
 }
 
 function sum(...args) {
-    sleep(500);
+    sleep(100);
     return args.reduce((sum, arg) => {
         return sum += +arg;
     }, 0);
@@ -63,20 +63,23 @@ function compareArrays(arr1, arr2) {
 function memorize(fn, limit) {
     const memory = [];
 
-    function result() {
-        const value = memory.find(item => compareArrays(arr1, item.args));
+    return function newF(...args) {
+        const value = memory.find(item => compareArrays(item.args, args));
 
         if (value) {
-            return value;
+            return value.result;
         }
 
-        memory.push({
-            args: resultArr,
-            result: fn(...resultArr),
-        });
+        const result = fn(...args);
+
         if (memory.length > limit) {
             memory.shift();
         }
-        return memory[memory.length - 1].result;
+        memory.push({
+            args,
+            result
+        });
+        return result;
     }
 }
+const mSum = memorize(sum, 2);
