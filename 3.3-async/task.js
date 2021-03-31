@@ -12,7 +12,7 @@ class AlarmClock {
         }
 
         if (this.alarmCollection.some(item => item.id === id)) {
-            console.error("Ошибка! Id уже существует");
+            return console.error("Ошибка! Id уже существует");
         }
 
         this.alarmCollection.push({
@@ -43,16 +43,18 @@ class AlarmClock {
 
         function checkClock(clock) {
             if (getCurrentTime() === clock.time) {
-                clock.callback();
+                clock.fn();
             }
+        }
+
+        if (this.timerId === null) {
+            this.timerId = setInterval(() => {
+                this.alarmCollection.forEach(item => checkClock(item))
+            }, 1000)
         }
     }
 
-    if (this.timerId === null) {
-        this.timerId = setInterval(() => {
-            this.alarmCollection.forEach(item => checkClock(item))
-        }, 1000)
-    }
+
 
     stop() {
         if (this.timerId) {
@@ -66,7 +68,7 @@ class AlarmClock {
     }
 
     clearAlarms() {
-        stop();
+        this.stop();
         this.alarmCollection = [];
     }
 }
